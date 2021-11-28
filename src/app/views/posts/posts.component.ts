@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Posts } from 'src/app/interfaces/postsModel';
 import { PostsService } from 'src/app/services/posts.service';
 
 @Component({
@@ -10,11 +11,13 @@ export class PostsComponent implements OnInit {
 
   constructor(private postService:PostsService) { }
 
+  posts:Posts[] = []
   getPosts(){
     this.postService.getPosts().subscribe(
       {
-        next:(response:any) =>{
-          console.log(response)
+        next:(res:any) =>{
+          console.log(res)
+          this.posts = res
         },
         error:(httpError:any) =>{
           console.log(httpError);
